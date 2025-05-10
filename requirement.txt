@@ -1,0 +1,8 @@
+mcp>=1.8.0
+fastapi
+uvicorn
+uvicorn[standard]
+python-dotenv
+openai
+httpx
+pydantic

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCP client demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #answer {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            min-height: 60px;
+        }
+        .option-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .option-group label {
+            white-space: nowrap;
+        }
+        #message-list {
+            margin-top: 20px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .message-card {
+            background: white;
+            border-left: 4px solid #4CAF50;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            font-family: 'Courier New', monospace;
+            word-wrap: break-word; /* 允许长单词换行 */
+            overflow-wrap: break-word; /* 更现代的属性 */
+        }
+
+        .message-card pre {
+            white-space: pre-wrap; /* 保留格式但允许换行 */
+            word-break: break-all; /* 强制换行 */
+        }
+
+        .message-header {
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-weight: bold;
+            display: flex;
+            gap: 15px;
+        }
+
+        .seq-id {
+            color: #e74c3c;
+        }
+
+        .tool-name {
+            color: #3498db;
+        }
+
+        .tool-seq {
+            color: #9b59b6;
+        }
+
+        .info-block {
+            margin: 8px 0;
+            padding-left: 10px;
+        }
+
+        .reason-block {
+            color: #95a5a6;
+            border-left: 2px solid #eee;
+        }
+
+        .param-block {
+            color: #e67e22;
+            border-left: 2px solid #eee;
+        }
+
+        .result-block {
+            color: #27ae60;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 3px;
+            margin-top: 8px;
+            border-left: 2px solid #eee;
+        }
+
+        .label {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MCP client demo</h1>
+        <div class="input-group">
+            <input type="text" id="question" placeholder="请输入您的问题...">
+
+            <div class="option-group">
+                <label for="parallel">是否并行工具调用：</label>
+                <select id="parallel">
+                    <option value="True" selected>是</option>
+                    <option value="False">否</option>
+                </select>
+            </div>
+
+            <div class="button-group">
+                <button onclick="submitQuestion()">提交问题</button>
+            </div>
+        </div>
+        <div id="answer"></div>
+        <div id="message-list"></div>
+    </div>
+
+    <script>
+        let ws; // 改为let声明以便重新赋值
+
+        // 初始化WebSocket连接
+        function connectWebSocket() {
+            // 关闭现有连接
+            if (ws && (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING)) {
+                ws.close();
+            }
+
+            // 创建新连接
+            ws = new WebSocket(`ws://${window.location.host}/ws`);
+
+            // 绑定消息处理
+            ws.onmessage = handleWebSocketMessage;
+
+            // 可选：添加连接状态提示
+            ws.onopen = () => console.log('WebSocket连接已建立');
+            ws.onclose = () => console.log('WebSocket连接已关闭');
+            ws.onerror = (error) => console.error('WebSocket错误:', error);
+        }
+
+        // 独立的消息处理函数
+        function handleWebSocketMessage(event) {
+            try {
+                const message = JSON.parse(event.data);
+                const card = document.createElement('div');
+                card.className = 'message-card';
+
+                card.innerHTML = `
+                    <div class="message-header">
+                        <div><span class="label">执行序号:</span> <span class="seq-id">${message.seq}</span></div>
+                        <div><span class="label">工具序号:</span> <span class="tool-seq">${message.tool_seq}</span></div>
+                        <div><span class="label">工具名称:</span> <span class="tool-name">${message.tool_name}</span></div>
+                    </div>
+                    <div class="info-block reason-block">
+                        <div><span class="label">模型选择工具的原因:</span> ${message.use_tool_reason || '无'}</div>
+                    </div>
+                    <div class="info-block param-block">
+                        <div><span class="label">模型选择调用工具的参数:</span></div>
+                        <pre>${formatJsonDisplay(message.function_args)}</pre>
+                    </div>
+                    <div class="info-block result-block">
+                        <div><span class="label">工具执行结果:</span></div>
+                        <pre>${formatJsonDisplay(message.tool_exec_result)}</pre>
+                    </div>
+                `;
+
+                document.getElementById('message-list').appendChild(card);
+                // card.scrollIntoView({behavior: "smooth"});
+            } catch (error) {
+                console.error('解析WebSocket消息失败:', error);
+            }
+        }
+
+        // 格式化JSON显示
+        function formatJsonDisplay(data) {
+            if (typeof data === 'string') {
+                try {
+                    // 尝试解析字符串中的JSON
+                    return JSON.stringify(JSON.parse(data))
+                        .replace(/\n/g, '<br>') // 换行转换为HTML
+                        .replace(/ /g, '&nbsp;'); // 空格转换为HTML实体
+                } catch {
+                    return data;
+                }
+            } else if (typeof data === 'object') {
+                return JSON.stringify(data);
+            }
+            return data;
+        }
+
+        async function submitQuestion() {
+            // 清空数据
+            document.getElementById('answer').innerHTML = '';
+            document.getElementById('message-list').innerHTML = '';
+            // 建立初始连接
+            connectWebSocket();
+
+            const question = document.getElementById('question').value;
+            const parallel = document.getElementById('parallel').value;
+            const answerDiv = document.getElementById('answer');
+
+            if (!question) {
+                answerDiv.innerHTML = "请输入问题内容";
+                return;
+            }
+
+            try {
+                const response = await fetch('/chat_mcp', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        question: question,
+                        parallel: parallel
+                    })
+                });
+
+                const data = await response.json();
+                answerDiv.innerHTML = `回答：${data.answer}`;
+            } catch (error) {
+                answerDiv.innerHTML = "获取回答时出错，请稍后再试";
+                console.error('Error:', error);
+            }
+        }
+    </script>
+</body>
+</html>
