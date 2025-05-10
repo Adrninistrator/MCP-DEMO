@@ -1,0 +1,196 @@
+2025-04-26 11:30:19.513 INFO request_times: 0001
+type: REQUEST
+url: https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+method: POST
+body: {
+  "messages": [
+    {
+      "content": "深圳现在天气怎么样，几点了",
+      "role": "user"
+    }
+  ],
+  "model": "qwen2.5-7b-instruct",
+  "parallel_tool_calls": true,
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "get_current_time",
+        "description": "当你想知道现在的时间时非常有用。",
+        "parameters": {}
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_current_weather",
+        "description": "当你想查询指定城市的天气时非常有用。",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "location": {
+              "type": "string",
+              "description": "城市或县区，比如北京市、杭州市、余杭区等。"
+            }
+          },
+          "required": [
+            "location"
+          ]
+        }
+      }
+    }
+  ]
+}
+2025-04-26 11:30:21.060 INFO request_times: 0001
+type: RESPONSE
+spend_time_ms: 1546.871
+url: https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+status: 200
+body: {
+  "choices": [
+    {
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_6bc3f82256db43989b799e",
+            "type": "function",
+            "function": {
+              "name": "get_current_weather",
+              "arguments": "{\"location\": \"深圳市\"}"
+            }
+          },
+          {
+            "index": 1,
+            "id": "call_aad5a1cc024a487cacf349",
+            "type": "function",
+            "function": {
+              "name": "get_current_time",
+              "arguments": "{}"
+            }
+          }
+        ]
+      },
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null
+    }
+  ],
+  "object": "chat.completion",
+  "usage": {
+    "prompt_tokens": 297,
+    "completion_tokens": 31,
+    "total_tokens": 328
+  },
+  "created": 1745638221,
+  "system_fingerprint": null,
+  "model": "qwen2.5-7b-instruct",
+  "id": "chatcmpl-4df4d8bb-242c-9193-9e1a-62845c318431"
+}
+2025-04-26 11:30:21.090 INFO request_times: 0002
+type: REQUEST
+url: https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+method: POST
+body: {
+  "messages": [
+    {
+      "content": "深圳现在天气怎么样，几点了",
+      "role": "user"
+    },
+    {
+      "content": "",
+      "role": "assistant",
+      "tool_calls": [
+        {
+          "id": "call_6bc3f82256db43989b799e",
+          "function": {
+            "arguments": "{\"location\": \"深圳市\"}",
+            "name": "get_current_weather"
+          },
+          "type": "function",
+          "index": 0
+        },
+        {
+          "id": "call_aad5a1cc024a487cacf349",
+          "function": {
+            "arguments": "{}",
+            "name": "get_current_time"
+          },
+          "type": "function",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "深圳市今天是晴天。",
+      "tool_call_id": "call_6bc3f82256db43989b799e"
+    },
+    {
+      "role": "tool",
+      "content": "当前时间：2025-04-26 11:30:21。",
+      "tool_call_id": "call_aad5a1cc024a487cacf349"
+    }
+  ],
+  "model": "qwen2.5-7b-instruct",
+  "parallel_tool_calls": true,
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "get_current_time",
+        "description": "当你想知道现在的时间时非常有用。",
+        "parameters": {}
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_current_weather",
+        "description": "当你想查询指定城市的天气时非常有用。",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "location": {
+              "type": "string",
+              "description": "城市或县区，比如北京市、杭州市、余杭区等。"
+            }
+          },
+          "required": [
+            "location"
+          ]
+        }
+      }
+    }
+  ]
+}
+2025-04-26 11:30:22.513 INFO request_times: 0002
+type: RESPONSE
+spend_time_ms: 1422.719
+url: https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+status: 200
+body: {
+  "choices": [
+    {
+      "message": {
+        "content": "深圳现在的天气是晴天。当前时间是2025年04月26日11点30分21秒。",
+        "role": "assistant"
+      },
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null
+    }
+  ],
+  "object": "chat.completion",
+  "usage": {
+    "prompt_tokens": 373,
+    "completion_tokens": 35,
+    "total_tokens": 408
+  },
+  "created": 1745638222,
+  "system_fingerprint": null,
+  "model": "qwen2.5-7b-instruct",
+  "id": "chatcmpl-3989aabe-6ffb-9382-a779-5d86314350e5"
+}

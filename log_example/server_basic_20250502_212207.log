@@ -1,0 +1,89 @@
+2025-05-02 21:22:07.813 DEBUG SseServerTransport initialized with endpoint: /messages/
+2025-05-02 22:41:20.648 DEBUG Setting up SSE connection
+2025-05-02 22:41:20.652 DEBUG Created new session with ID: 924c5fe9-228c-469f-8a37-59bcdd0ada33
+2025-05-02 22:41:20.655 DEBUG Starting SSE response task
+2025-05-02 22:41:20.657 DEBUG Yielding read and write streams
+2025-05-02 22:41:20.667 DEBUG Starting SSE writer
+2025-05-02 22:41:20.669 DEBUG Sent endpoint event: /messages/?session_id=924c5fe9228c469f8a3759bcdd0ada33
+2025-05-02 22:41:20.681 DEBUG Handling POST message
+2025-05-02 22:41:20.683 DEBUG Parsed session ID: 924c5fe9-228c-469f-8a37-59bcdd0ada33
+2025-05-02 22:41:20.686 DEBUG Received JSON: b'{"method":"initialize","params":{"protocolVersion":"2024-11-05","capabilities":{"sampling":{},"roots":{"listChanged":true}},"clientInfo":{"name":"mcp","version":"0.1.0"}},"jsonrpc":"2.0","id":0}'
+2025-05-02 22:41:20.691 DEBUG Validated client message: root=JSONRPCRequest(method='initialize', params={'protocolVersion': '2024-11-05', 'capabilities': {'sampling': {}, 'roots': {'listChanged': True}}, 'clientInfo': {'name': 'mcp', 'version': '0.1.0'}}, jsonrpc='2.0', id=0)
+2025-05-02 22:41:20.696 DEBUG Sending message to writer: root=JSONRPCRequest(method='initialize', params={'protocolVersion': '2024-11-05', 'capabilities': {'sampling': {}, 'roots': {'listChanged': True}}, 'clientInfo': {'name': 'mcp', 'version': '0.1.0'}}, jsonrpc='2.0', id=0)
+2025-05-02 22:41:20.704 DEBUG Sending message via SSE: root=JSONRPCResponse(jsonrpc='2.0', id=0, result={'protocolVersion': '2024-11-05', 'capabilities': {'experimental': {}, 'prompts': {'listChanged': False}, 'resources': {'subscribe': False, 'listChanged': False}, 'tools': {'listChanged': False}}, 'serverInfo': {'name': 'high_speed_railQuerySystem', 'version': '1.6.0'}})
+2025-05-02 22:41:20.717 DEBUG Handling POST message
+2025-05-02 22:41:20.719 DEBUG Parsed session ID: 924c5fe9-228c-469f-8a37-59bcdd0ada33
+2025-05-02 22:41:20.721 DEBUG Received JSON: b'{"method":"notifications/initialized","jsonrpc":"2.0"}'
+2025-05-02 22:41:20.723 DEBUG Validated client message: root=JSONRPCNotification(method='notifications/initialized', params=None, jsonrpc='2.0')
+2025-05-02 22:41:20.726 DEBUG Sending message to writer: root=JSONRPCNotification(method='notifications/initialized', params=None, jsonrpc='2.0')
+2025-05-02 22:41:20.731 DEBUG Received message: root=InitializedNotification(method='notifications/initialized', params=None, jsonrpc='2.0')
+2025-05-02 22:41:20.736 DEBUG Handling POST message
+2025-05-02 22:41:20.738 DEBUG Parsed session ID: 924c5fe9-228c-469f-8a37-59bcdd0ada33
+2025-05-02 22:41:20.740 DEBUG Received JSON: b'{"method":"tools/list","jsonrpc":"2.0","id":1}'
+2025-05-02 22:41:20.744 DEBUG Validated client message: root=JSONRPCRequest(method='tools/list', params=None, jsonrpc='2.0', id=1)
+2025-05-02 22:41:20.746 DEBUG Sending message to writer: root=JSONRPCRequest(method='tools/list', params=None, jsonrpc='2.0', id=1)
+2025-05-02 22:41:20.751 DEBUG Received message: <mcp.shared.session.RequestResponder object at 0x0000024E7D30EAD0>
+2025-05-02 22:41:20.755 INFO Processing request of type ListToolsRequest
+2025-05-02 22:41:20.758 DEBUG Dispatching request of type ListToolsRequest
+2025-05-02 22:41:20.762 DEBUG Response sent
+2025-05-02 22:41:20.765 DEBUG Sending message via SSE: root=JSONRPCResponse(jsonrpc='2.0', id=1, result={'tools': [{'name': 'get_all_lines', 'description': '获取所有高铁线路编号，需要首先调用当前接口', 'inputSchema': {'properties': {}, 'title': 'get_all_linesArguments', 'type': 'object'}}, {'name': 'query_stations', 'description': '根据高铁线路编号查询起始站点名称，可用于判断指定线路是否能从某个站点到达另一个站点', 'inputSchema': {'properties': {'line_name': {'description': '高铁线路编号如G1/G2', 'title': 'Line Name', 'type': 'string'}}, 'required': ['line_name'], 'title': 'query_stationsArguments', 'type': 'object'}}, {'name': 'query_duration', 'description': '根据高铁线路编号查询运行时长', 'inputSchema': {'$defs': {'LineNameRequest1': {'properties': {'line_name': {'description': '高铁线路编号如G1/G2', 'title': 'Line Name', 'type': 'string'}}, 'required': ['line_name'], 'title': 'LineNameRequest1', 'type': 'object'}}, 'properties': {'line_name_request': {'allOf': [{'$ref': '#/$defs/LineNameRequest1'}], 'description': '高铁线路编号请求类1'}}, 'required': ['line_name_request'], 'title': 'query_durationArguments', 'type': 'object'}}, {'name': 'query_ticket_price', 'description': '根据高铁线路编号查询最低票价', 'inputSchema': {'$defs': {'LineNameRequest2': {'properties': {'line_name': {'description': '高铁线路编号如G1/G2', 'title': 'Line Name', 'type': 'string'}, 'not_used': {'default': '', 'description': '暂未使用的参数', 'title': 'Not Used', 'type': 'string'}}, 'required': ['line_name'], 'title': 'LineNameRequest2', 'type': 'object'}}, 'properties': {'line_name_request': {'allOf': [{'$ref': '#/$defs/LineNameRequest2'}], 'description': '高铁线路编号请求类2'}}, 'required': ['line_name_request'], 'title': 'query_ticket_priceArguments', 'type': 'object'}}]})
+2025-05-02 22:41:25.118 DEBUG Handling POST message
+2025-05-02 22:41:25.121 DEBUG Parsed session ID: 924c5fe9-228c-469f-8a37-59bcdd0ada33
+2025-05-02 22:41:25.123 DEBUG Received JSON: b'{"method":"tools/call","params":{"name":"get_all_lines","arguments":{}},"jsonrpc":"2.0","id":2}'
+2025-05-02 22:41:25.126 DEBUG Validated client message: root=JSONRPCRequest(method='tools/call', params={'name': 'get_all_lines', 'arguments': {}}, jsonrpc='2.0', id=2)
+2025-05-02 22:41:25.128 DEBUG Sending message to writer: root=JSONRPCRequest(method='tools/call', params={'name': 'get_all_lines', 'arguments': {}}, jsonrpc='2.0', id=2)
+2025-05-02 22:41:25.133 DEBUG Received message: <mcp.shared.session.RequestResponder object at 0x0000024E7D2D2A50>
+2025-05-02 22:41:25.136 INFO Processing request of type CallToolRequest
+2025-05-02 22:41:25.138 DEBUG Dispatching request of type CallToolRequest
+2025-05-02 22:41:25.140 DEBUG Response sent
+2025-05-02 22:41:25.143 DEBUG Sending message via SSE: root=JSONRPCResponse(jsonrpc='2.0', id=2, result={'content': [{'type': 'text', 'text': 'G1'}, {'type': 'text', 'text': 'G2'}, {'type': 'text', 'text': 'G3'}], 'isError': False})
+2025-05-02 22:41:27.887 DEBUG Handling POST message
+2025-05-02 22:41:27.889 DEBUG Parsed session ID: 924c5fe9-228c-469f-8a37-59bcdd0ada33
+2025-05-02 22:41:27.891 DEBUG Received JSON: b'{"method":"tools/call","params":{"name":"query_stations","arguments":{"line_name":"G1"}},"jsonrpc":"2.0","id":3}'
+2025-05-02 22:41:27.894 DEBUG Validated client message: root=JSONRPCRequest(method='tools/call', params={'name': 'query_stations', 'arguments': {'line_name': 'G1'}}, jsonrpc='2.0', id=3)
+2025-05-02 22:41:27.897 DEBUG Sending message to writer: root=JSONRPCRequest(method='tools/call', params={'name': 'query_stations', 'arguments': {'line_name': 'G1'}}, jsonrpc='2.0', id=3)
+2025-05-02 22:41:27.901 DEBUG Received message: <mcp.shared.session.RequestResponder object at 0x0000024E7D49B590>
+2025-05-02 22:41:27.904 INFO Processing request of type CallToolRequest
+2025-05-02 22:41:27.905 DEBUG Dispatching request of type CallToolRequest
+2025-05-02 22:41:27.908 DEBUG Response sent
+2025-05-02 22:41:27.910 DEBUG Sending message via SSE: root=JSONRPCResponse(jsonrpc='2.0', id=3, result={'content': [{'type': 'text', 'text': '{"line": "G1", "start": "bjx", "end": "zzd"}'}], 'isError': False})
+2025-05-02 22:41:27.919 DEBUG Handling POST message
+2025-05-02 22:41:27.922 DEBUG Parsed session ID: 924c5fe9-228c-469f-8a37-59bcdd0ada33
+2025-05-02 22:41:27.927 DEBUG Received JSON: b'{"method":"tools/call","params":{"name":"query_stations","arguments":{"line_name":"G2"}},"jsonrpc":"2.0","id":4}'
+2025-05-02 22:41:27.931 DEBUG Validated client message: root=JSONRPCRequest(method='tools/call', params={'name': 'query_stations', 'arguments': {'line_name': 'G2'}}, jsonrpc='2.0', id=4)
+2025-05-02 22:41:27.935 DEBUG Sending message to writer: root=JSONRPCRequest(method='tools/call', params={'name': 'query_stations', 'arguments': {'line_name': 'G2'}}, jsonrpc='2.0', id=4)
+2025-05-02 22:41:27.941 DEBUG Received message: <mcp.shared.session.RequestResponder object at 0x0000024E7D36AE10>
+2025-05-02 22:41:27.943 INFO Processing request of type CallToolRequest
+2025-05-02 22:41:27.945 DEBUG Dispatching request of type CallToolRequest
+2025-05-02 22:41:27.947 DEBUG Response sent
+2025-05-02 22:41:27.948 DEBUG Sending message via SSE: root=JSONRPCResponse(jsonrpc='2.0', id=4, result={'content': [{'type': 'text', 'text': '{"line": "G2", "start": "cqx", "end": "gyb"}'}], 'isError': False})
+2025-05-02 22:41:27.956 DEBUG Handling POST message
+2025-05-02 22:41:27.959 DEBUG Parsed session ID: 924c5fe9-228c-469f-8a37-59bcdd0ada33
+2025-05-02 22:41:27.961 DEBUG Received JSON: b'{"method":"tools/call","params":{"name":"query_stations","arguments":{"line_name":"G3"}},"jsonrpc":"2.0","id":5}'
+2025-05-02 22:41:27.965 DEBUG Validated client message: root=JSONRPCRequest(method='tools/call', params={'name': 'query_stations', 'arguments': {'line_name': 'G3'}}, jsonrpc='2.0', id=5)
+2025-05-02 22:41:27.970 DEBUG Sending message to writer: root=JSONRPCRequest(method='tools/call', params={'name': 'query_stations', 'arguments': {'line_name': 'G3'}}, jsonrpc='2.0', id=5)
+2025-05-02 22:41:27.975 DEBUG Received message: <mcp.shared.session.RequestResponder object at 0x0000024E7D3C8150>
+2025-05-02 22:41:27.978 INFO Processing request of type CallToolRequest
+2025-05-02 22:41:27.980 DEBUG Dispatching request of type CallToolRequest
+2025-05-02 22:41:27.982 DEBUG Response sent
+2025-05-02 22:41:27.985 DEBUG Sending message via SSE: root=JSONRPCResponse(jsonrpc='2.0', id=5, result={'content': [{'type': 'text', 'text': '{"line": "G3", "start": "cdd", "end": "xab"}'}], 'isError': False})
+2025-05-02 22:41:30.727 DEBUG Handling POST message
+2025-05-02 22:41:30.730 DEBUG Parsed session ID: 924c5fe9-228c-469f-8a37-59bcdd0ada33
+2025-05-02 22:41:30.732 DEBUG Received JSON: b'{"method":"tools/call","params":{"name":"query_duration","arguments":{"line_name_request":{"line_name":"G2"}}},"jsonrpc":"2.0","id":6}'
+2025-05-02 22:41:30.735 DEBUG Validated client message: root=JSONRPCRequest(method='tools/call', params={'name': 'query_duration', 'arguments': {'line_name_request': {'line_name': 'G2'}}}, jsonrpc='2.0', id=6)
+2025-05-02 22:41:30.738 DEBUG Sending message to writer: root=JSONRPCRequest(method='tools/call', params={'name': 'query_duration', 'arguments': {'line_name_request': {'line_name': 'G2'}}}, jsonrpc='2.0', id=6)
+2025-05-02 22:41:30.742 DEBUG Received message: <mcp.shared.session.RequestResponder object at 0x0000024E7D30EAD0>
+2025-05-02 22:41:30.746 INFO Processing request of type CallToolRequest
+2025-05-02 22:41:30.748 DEBUG Dispatching request of type CallToolRequest
+2025-05-02 22:41:30.749 DEBUG Response sent
+2025-05-02 22:41:30.751 DEBUG Sending message via SSE: root=JSONRPCResponse(jsonrpc='2.0', id=6, result={'content': [{'type': 'text', 'text': '{"line": "G2", "duration": 120, "unit": "分钟"}'}], 'isError': False})
+2025-05-02 22:41:30.761 DEBUG Handling POST message
+2025-05-02 22:41:30.764 DEBUG Parsed session ID: 924c5fe9-228c-469f-8a37-59bcdd0ada33
+2025-05-02 22:41:30.767 DEBUG Received JSON: b'{"method":"tools/call","params":{"name":"query_ticket_price","arguments":{"line_name_request":{"line_name":"G2","not_used":""}}},"jsonrpc":"2.0","id":7}'
+2025-05-02 22:41:30.770 DEBUG Validated client message: root=JSONRPCRequest(method='tools/call', params={'name': 'query_ticket_price', 'arguments': {'line_name_request': {'line_name': 'G2', 'not_used': ''}}}, jsonrpc='2.0', id=7)
+2025-05-02 22:41:30.775 DEBUG Sending message to writer: root=JSONRPCRequest(method='tools/call', params={'name': 'query_ticket_price', 'arguments': {'line_name_request': {'line_name': 'G2', 'not_used': ''}}}, jsonrpc='2.0', id=7)
+2025-05-02 22:41:30.780 DEBUG Received message: <mcp.shared.session.RequestResponder object at 0x0000024E7D3C8150>
+2025-05-02 22:41:30.782 INFO Processing request of type CallToolRequest
+2025-05-02 22:41:30.784 DEBUG Dispatching request of type CallToolRequest
+2025-05-02 22:41:30.787 DEBUG Response sent
+2025-05-02 22:41:30.788 DEBUG Sending message via SSE: root=JSONRPCResponse(jsonrpc='2.0', id=7, result={'content': [{'type': 'text', 'text': '{"line": "G2", "price": 130, "currency": "CNY"}'}], 'isError': False})

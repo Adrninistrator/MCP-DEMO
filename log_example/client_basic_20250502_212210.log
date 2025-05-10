@@ -1,0 +1,1045 @@
+2025-05-02 22:41:20.603 INFO 执行请求 question='我要坐高铁从站点cqx到gyb，有什么线路，需要多久，最低多少钱' parallel=True
+2025-05-02 22:41:20.623 INFO Connecting to SSE endpoint: http://127.0.0.1:8000/sse
+2025-05-02 22:41:20.667 DEBUG SSE connection established
+2025-05-02 22:41:20.672 DEBUG Received SSE event: endpoint
+2025-05-02 22:41:20.673 INFO Received endpoint URL: http://127.0.0.1:8000/messages/?session_id=924c5fe9228c469f8a3759bcdd0ada33
+2025-05-02 22:41:20.673 INFO Starting post writer with endpoint URL: http://127.0.0.1:8000/messages/?session_id=924c5fe9228c469f8a3759bcdd0ada33
+2025-05-02 22:41:20.674 DEBUG Sending client message: root=JSONRPCRequest(method='initialize', params={'protocolVersion': '2024-11-05', 'capabilities': {'sampling': {}, 'roots': {'listChanged': True}}, 'clientInfo': {'name': 'mcp', 'version': '0.1.0'}}, jsonrpc='2.0', id=0)
+2025-05-02 22:41:20.704 DEBUG Client message sent successfully: 202
+2025-05-02 22:41:20.713 DEBUG Received SSE event: message
+2025-05-02 22:41:20.713 DEBUG Received server message: root=JSONRPCResponse(jsonrpc='2.0', id=0, result={'protocolVersion': '2024-11-05', 'capabilities': {'experimental': {}, 'prompts': {'listChanged': False}, 'resources': {'subscribe': False, 'listChanged': False}, 'tools': {'listChanged': False}}, 'serverInfo': {'name': 'high_speed_railQuerySystem', 'version': '1.6.0'}})
+2025-05-02 22:41:20.715 DEBUG Sending client message: root=JSONRPCNotification(method='notifications/initialized', params=None, jsonrpc='2.0')
+2025-05-02 22:41:20.733 DEBUG Client message sent successfully: 202
+2025-05-02 22:41:20.733 DEBUG Sending client message: root=JSONRPCRequest(method='tools/list', params=None, jsonrpc='2.0', id=1)
+2025-05-02 22:41:20.753 DEBUG Client message sent successfully: 202
+2025-05-02 22:41:20.791 DEBUG Received SSE event: message
+2025-05-02 22:41:20.792 DEBUG Received server message: root=JSONRPCResponse(jsonrpc='2.0', id=1, result={'tools': [{'name': 'get_all_lines', 'description': '获取所有高铁线路编号，需要首先调用当前接口', 'inputSchema': {'properties': {}, 'title': 'get_all_linesArguments', 'type': 'object'}}, {'name': 'query_stations', 'description': '根据高铁线路编号查询起始站点名称，可用于判断指定线路是否能从某个站点到达另一个站点', 'inputSchema': {'properties': {'line_name': {'description': '高铁线路编号如G1/G2', 'title': 'Line Name', 'type': 'string'}}, 'required': ['line_name'], 'title': 'query_stationsArguments', 'type': 'object'}}, {'name': 'query_duration', 'description': '根据高铁线路编号查询运行时长', 'inputSchema': {'$defs': {'LineNameRequest1': {'properties': {'line_name': {'description': '高铁线路编号如G1/G2', 'title': 'Line Name', 'type': 'string'}}, 'required': ['line_name'], 'title': 'LineNameRequest1', 'type': 'object'}}, 'properties': {'line_name_request': {'allOf': [{'$ref': '#/$defs/LineNameRequest1'}], 'description': '高铁线路编号请求类1'}}, 'required': ['line_name_request'], 'title': 'query_durationArguments', 'type': 'object'}}, {'name': 'query_ticket_price', 'description': '根据高铁线路编号查询最低票价', 'inputSchema': {'$defs': {'LineNameRequest2': {'properties': {'line_name': {'description': '高铁线路编号如G1/G2', 'title': 'Line Name', 'type': 'string'}, 'not_used': {'default': '', 'description': '暂未使用的参数', 'title': 'Not Used', 'type': 'string'}}, 'required': ['line_name'], 'title': 'LineNameRequest2', 'type': 'object'}}, 'properties': {'line_name_request': {'allOf': [{'$ref': '#/$defs/LineNameRequest2'}], 'description': '高铁线路编号请求类2'}}, 'required': ['line_name_request'], 'title': 'query_ticket_priceArguments', 'type': 'object'}}]})
+2025-05-02 22:41:20.794 INFO MCP Server Tools meta=None nextCursor=None tools=[Tool(name='get_all_lines', description='获取所有高铁线路编号，需要首先调用当前接口', inputSchema={'properties': {}, 'title': 'get_all_linesArguments', 'type': 'object'}), Tool(name='query_stations', description='根据高铁线路编号查询起始站点名称，可用于判断指定线路是否能从某个站点到达另一个站点', inputSchema={'properties': {'line_name': {'description': '高铁线路编号如G1/G2', 'title': 'Line Name', 'type': 'string'}}, 'required': ['line_name'], 'title': 'query_stationsArguments', 'type': 'object'}), Tool(name='query_duration', description='根据高铁线路编号查询运行时长', inputSchema={'$defs': {'LineNameRequest1': {'properties': {'line_name': {'description': '高铁线路编号如G1/G2', 'title': 'Line Name', 'type': 'string'}}, 'required': ['line_name'], 'title': 'LineNameRequest1', 'type': 'object'}}, 'properties': {'line_name_request': {'allOf': [{'$ref': '#/$defs/LineNameRequest1'}], 'description': '高铁线路编号请求类1'}}, 'required': ['line_name_request'], 'title': 'query_durationArguments', 'type': 'object'}), Tool(name='query_ticket_price', description='根据高铁线路编号查询最低票价', inputSchema={'$defs': {'LineNameRequest2': {'properties': {'line_name': {'description': '高铁线路编号如G1/G2', 'title': 'Line Name', 'type': 'string'}, 'not_used': {'default': '', 'description': '暂未使用的参数', 'title': 'Not Used', 'type': 'string'}}, 'required': ['line_name'], 'title': 'LineNameRequest2', 'type': 'object'}}, 'properties': {'line_name_request': {'allOf': [{'$ref': '#/$defs/LineNameRequest2'}], 'description': '高铁线路编号请求类2'}}, 'required': ['line_name_request'], 'title': 'query_ticket_priceArguments', 'type': 'object'})]
+2025-05-02 22:41:21.177 INFO request_times: 0001
+type: REQUEST
+url: https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+method: POST
+body: {
+  "messages": [
+    {
+      "role": "system",
+      "content": "仅使用role=tool相关数据进行分析，不使用模型中的数据"
+    },
+    {
+      "role": "user",
+      "content": "要求：每次返回选择工具时，在choices.message.content返回选择工具的原因\n任务：我要坐高铁从站点cqx到gyb，有什么线路，需要多久，最低多少钱"
+    }
+  ],
+  "model": "qwen2.5-72b-instruct",
+  "parallel_tool_calls": true,
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "get_all_lines",
+        "description": "获取所有高铁线路编号，需要首先调用当前接口",
+        "parameters": {
+          "properties": {},
+          "title": "get_all_linesArguments",
+          "type": "object"
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "query_stations",
+        "description": "根据高铁线路编号查询起始站点名称，可用于判断指定线路是否能从某个站点到达另一个站点",
+        "parameters": {
+          "properties": {
+            "line_name": {
+              "description": "高铁线路编号如G1/G2",
+              "title": "Line Name",
+              "type": "string"
+            }
+          },
+          "required": [
+            "line_name"
+          ],
+          "title": "query_stationsArguments",
+          "type": "object"
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "query_duration",
+        "description": "根据高铁线路编号查询运行时长",
+        "parameters": {
+          "$defs": {
+            "LineNameRequest1": {
+              "properties": {
+                "line_name": {
+                  "description": "高铁线路编号如G1/G2",
+                  "title": "Line Name",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "line_name"
+              ],
+              "title": "LineNameRequest1",
+              "type": "object"
+            }
+          },
+          "properties": {
+            "line_name_request": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/LineNameRequest1"
+                }
+              ],
+              "description": "高铁线路编号请求类1"
+            }
+          },
+          "required": [
+            "line_name_request"
+          ],
+          "title": "query_durationArguments",
+          "type": "object"
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "query_ticket_price",
+        "description": "根据高铁线路编号查询最低票价",
+        "parameters": {
+          "$defs": {
+            "LineNameRequest2": {
+              "properties": {
+                "line_name": {
+                  "description": "高铁线路编号如G1/G2",
+                  "title": "Line Name",
+                  "type": "string"
+                },
+                "not_used": {
+                  "default": "",
+                  "description": "暂未使用的参数",
+                  "title": "Not Used",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "line_name"
+              ],
+              "title": "LineNameRequest2",
+              "type": "object"
+            }
+          },
+          "properties": {
+            "line_name_request": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/LineNameRequest2"
+                }
+              ],
+              "description": "高铁线路编号请求类2"
+            }
+          },
+          "required": [
+            "line_name_request"
+          ],
+          "title": "query_ticket_priceArguments",
+          "type": "object"
+        }
+      }
+    }
+  ]
+}
+2025-05-02 22:41:25.099 INFO request_times: 0001
+type: RESPONSE
+spend_time_ms: 3922.969
+url: https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+status: 200
+body: {
+  "choices": [
+    {
+      "message": {
+        "content": "为了完成这个任务，我将分几个步骤来进行。首先，我需要获取所有可用的高铁线路编号。然后，我将检查这些线路中哪些可以从站点cqx到达gyb。最后，对于可以连接这两个站点的每条线路，我将查询它们的运行时长和最低票价。现在，我将开始第一步，即获取所有高铁线路编号。",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "name": "get_all_lines",
+              "arguments": "{}"
+            },
+            "index": 0,
+            "id": "call_e4debf7a5e154a0d9b6c78",
+            "type": "function"
+          }
+        ]
+      },
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null
+    }
+  ],
+  "object": "chat.completion",
+  "usage": {
+    "prompt_tokens": 726,
+    "completion_tokens": 92,
+    "total_tokens": 818
+  },
+  "created": 1746196885,
+  "system_fingerprint": null,
+  "model": "qwen2.5-72b-instruct",
+  "id": "chatcmpl-72f3b7a8-a5ba-9bab-9200-caf6a0447585"
+}
+2025-05-02 22:41:25.115 DEBUG Sending client message: root=JSONRPCRequest(method='tools/call', params={'name': 'get_all_lines', 'arguments': {}}, jsonrpc='2.0', id=2)
+2025-05-02 22:41:25.134 DEBUG Client message sent successfully: 202
+2025-05-02 22:41:25.147 DEBUG Received SSE event: message
+2025-05-02 22:41:25.148 DEBUG Received server message: root=JSONRPCResponse(jsonrpc='2.0', id=2, result={'content': [{'type': 'text', 'text': 'G1'}, {'type': 'text', 'text': 'G2'}, {'type': 'text', 'text': 'G3'}], 'isError': False})
+2025-05-02 22:41:25.148 INFO ### seq 1 tool_seq 1 执行工具 get_all_lines 选择工具原因 为了完成这个任务，我将分几个步骤来进行。首先，我需要获取所有可用的高铁线路编号。然后，我将检查这些线路中哪些可以从站点cqx到达gyb。最后，对于可以连接这两个站点的每条线路，我将查询它们的运行时长和最低票价。现在，我将开始第一步，即获取所有高铁线路编号。 参数 {} 工具返回 [TextContent(type='text', text='G1', annotations=None), TextContent(type='text', text='G2', annotations=None), TextContent(type='text', text='G3', annotations=None)]
+2025-05-02 22:41:25.188 INFO request_times: 0002
+type: REQUEST
+url: https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+method: POST
+body: {
+  "messages": [
+    {
+      "role": "system",
+      "content": "仅使用role=tool相关数据进行分析，不使用模型中的数据"
+    },
+    {
+      "role": "user",
+      "content": "要求：每次返回选择工具时，在choices.message.content返回选择工具的原因\n任务：我要坐高铁从站点cqx到gyb，有什么线路，需要多久，最低多少钱"
+    },
+    {
+      "content": "为了完成这个任务，我将分几个步骤来进行。首先，我需要获取所有可用的高铁线路编号。然后，我将检查这些线路中哪些可以从站点cqx到达gyb。最后，对于可以连接这两个站点的每条线路，我将查询它们的运行时长和最低票价。现在，我将开始第一步，即获取所有高铁线路编号。",
+      "role": "assistant",
+      "tool_calls": [
+        {
+          "id": "call_e4debf7a5e154a0d9b6c78",
+          "function": {
+            "arguments": "{}",
+            "name": "get_all_lines"
+          },
+          "type": "function",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_e4debf7a5e154a0d9b6c78",
+      "content": [
+        {
+          "type": "text",
+          "text": "G1"
+        },
+        {
+          "type": "text",
+          "text": "G2"
+        },
+        {
+          "type": "text",
+          "text": "G3"
+        }
+      ]
+    }
+  ],
+  "model": "qwen2.5-72b-instruct",
+  "parallel_tool_calls": true,
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "get_all_lines",
+        "description": "获取所有高铁线路编号，需要首先调用当前接口",
+        "parameters": {
+          "properties": {},
+          "title": "get_all_linesArguments",
+          "type": "object"
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "query_stations",
+        "description": "根据高铁线路编号查询起始站点名称，可用于判断指定线路是否能从某个站点到达另一个站点",
+        "parameters": {
+          "properties": {
+            "line_name": {
+              "description": "高铁线路编号如G1/G2",
+              "title": "Line Name",
+              "type": "string"
+            }
+          },
+          "required": [
+            "line_name"
+          ],
+          "title": "query_stationsArguments",
+          "type": "object"
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "query_duration",
+        "description": "根据高铁线路编号查询运行时长",
+        "parameters": {
+          "$defs": {
+            "LineNameRequest1": {
+              "properties": {
+                "line_name": {
+                  "description": "高铁线路编号如G1/G2",
+                  "title": "Line Name",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "line_name"
+              ],
+              "title": "LineNameRequest1",
+              "type": "object"
+            }
+          },
+          "properties": {
+            "line_name_request": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/LineNameRequest1"
+                }
+              ],
+              "description": "高铁线路编号请求类1"
+            }
+          },
+          "required": [
+            "line_name_request"
+          ],
+          "title": "query_durationArguments",
+          "type": "object"
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "query_ticket_price",
+        "description": "根据高铁线路编号查询最低票价",
+        "parameters": {
+          "$defs": {
+            "LineNameRequest2": {
+              "properties": {
+                "line_name": {
+                  "description": "高铁线路编号如G1/G2",
+                  "title": "Line Name",
+                  "type": "string"
+                },
+                "not_used": {
+                  "default": "",
+                  "description": "暂未使用的参数",
+                  "title": "Not Used",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "line_name"
+              ],
+              "title": "LineNameRequest2",
+              "type": "object"
+            }
+          },
+          "properties": {
+            "line_name_request": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/LineNameRequest2"
+                }
+              ],
+              "description": "高铁线路编号请求类2"
+            }
+          },
+          "required": [
+            "line_name_request"
+          ],
+          "title": "query_ticket_priceArguments",
+          "type": "object"
+        }
+      }
+    }
+  ]
+}
+2025-05-02 22:41:27.882 INFO request_times: 0002
+type: RESPONSE
+spend_time_ms: 2694.082
+url: https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+status: 200
+body: {
+  "choices": [
+    {
+      "message": {
+        "content": "我已成功获取了所有高铁线路编号，分别是 G1、G2 和 G3。接下来，我将分别查询这三条线路的起始站点名称，以确定哪些线路可以从站点 cqx 到达 gyb。",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "name": "query_stations",
+              "arguments": "{\"line_name\": \"G1\"}"
+            },
+            "index": 0,
+            "id": "call_abc51acab1784af9bd90dd",
+            "type": "function"
+          },
+          {
+            "function": {
+              "name": "query_stations",
+              "arguments": "{\"line_name\": \"G2\"}"
+            },
+            "index": 1,
+            "id": "call_e5a71b71be024d04adeb1e",
+            "type": "function"
+          },
+          {
+            "function": {
+              "name": "query_stations",
+              "arguments": "{\"line_name\": \"G3\"}"
+            },
+            "index": 2,
+            "id": "call_e0ced67191084a5cbf1f06",
+            "type": "function"
+          }
+        ]
+      },
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null
+    }
+  ],
+  "object": "chat.completion",
+  "usage": {
+    "prompt_tokens": 832,
+    "completion_tokens": 111,
+    "total_tokens": 943
+  },
+  "created": 1746196888,
+  "system_fingerprint": null,
+  "model": "qwen2.5-72b-instruct",
+  "id": "chatcmpl-8dd8a91e-2460-9781-a257-b44010ea80ba"
+}
+2025-05-02 22:41:27.884 DEBUG Sending client message: root=JSONRPCRequest(method='tools/call', params={'name': 'query_stations', 'arguments': {'line_name': 'G1'}}, jsonrpc='2.0', id=3)
+2025-05-02 22:41:27.902 DEBUG Client message sent successfully: 202
+2025-05-02 22:41:27.914 DEBUG Received SSE event: message
+2025-05-02 22:41:27.915 DEBUG Received server message: root=JSONRPCResponse(jsonrpc='2.0', id=3, result={'content': [{'type': 'text', 'text': '{"line": "G1", "start": "bjx", "end": "zzd"}'}], 'isError': False})
+2025-05-02 22:41:27.915 INFO ### seq 2 tool_seq 1 执行工具 query_stations 选择工具原因 我已成功获取了所有高铁线路编号，分别是 G1、G2 和 G3。接下来，我将分别查询这三条线路的起始站点名称，以确定哪些线路可以从站点 cqx 到达 gyb。 参数 {"line_name": "G1"} 工具返回 [TextContent(type='text', text='{"line": "G1", "start": "bjx", "end": "zzd"}', annotations=None)]
+2025-05-02 22:41:27.918 DEBUG Sending client message: root=JSONRPCRequest(method='tools/call', params={'name': 'query_stations', 'arguments': {'line_name': 'G2'}}, jsonrpc='2.0', id=4)
+2025-05-02 22:41:27.941 DEBUG Client message sent successfully: 202
+2025-05-02 22:41:27.953 DEBUG Received SSE event: message
+2025-05-02 22:41:27.953 DEBUG Received server message: root=JSONRPCResponse(jsonrpc='2.0', id=4, result={'content': [{'type': 'text', 'text': '{"line": "G2", "start": "cqx", "end": "gyb"}'}], 'isError': False})
+2025-05-02 22:41:27.954 INFO ### seq 2 tool_seq 2 执行工具 query_stations 选择工具原因 我已成功获取了所有高铁线路编号，分别是 G1、G2 和 G3。接下来，我将分别查询这三条线路的起始站点名称，以确定哪些线路可以从站点 cqx 到达 gyb。 参数 {"line_name": "G2"} 工具返回 [TextContent(type='text', text='{"line": "G2", "start": "cqx", "end": "gyb"}', annotations=None)]
+2025-05-02 22:41:27.955 DEBUG Sending client message: root=JSONRPCRequest(method='tools/call', params={'name': 'query_stations', 'arguments': {'line_name': 'G3'}}, jsonrpc='2.0', id=5)
+2025-05-02 22:41:27.976 DEBUG Client message sent successfully: 202
+2025-05-02 22:41:27.989 DEBUG Received SSE event: message
+2025-05-02 22:41:27.989 DEBUG Received server message: root=JSONRPCResponse(jsonrpc='2.0', id=5, result={'content': [{'type': 'text', 'text': '{"line": "G3", "start": "cdd", "end": "xab"}'}], 'isError': False})
+2025-05-02 22:41:27.989 INFO ### seq 2 tool_seq 3 执行工具 query_stations 选择工具原因 我已成功获取了所有高铁线路编号，分别是 G1、G2 和 G3。接下来，我将分别查询这三条线路的起始站点名称，以确定哪些线路可以从站点 cqx 到达 gyb。 参数 {"line_name": "G3"} 工具返回 [TextContent(type='text', text='{"line": "G3", "start": "cdd", "end": "xab"}', annotations=None)]
+2025-05-02 22:41:28.026 INFO request_times: 0003
+type: REQUEST
+url: https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+method: POST
+body: {
+  "messages": [
+    {
+      "role": "system",
+      "content": "仅使用role=tool相关数据进行分析，不使用模型中的数据"
+    },
+    {
+      "role": "user",
+      "content": "要求：每次返回选择工具时，在choices.message.content返回选择工具的原因\n任务：我要坐高铁从站点cqx到gyb，有什么线路，需要多久，最低多少钱"
+    },
+    {
+      "content": "为了完成这个任务，我将分几个步骤来进行。首先，我需要获取所有可用的高铁线路编号。然后，我将检查这些线路中哪些可以从站点cqx到达gyb。最后，对于可以连接这两个站点的每条线路，我将查询它们的运行时长和最低票价。现在，我将开始第一步，即获取所有高铁线路编号。",
+      "role": "assistant",
+      "tool_calls": [
+        {
+          "id": "call_e4debf7a5e154a0d9b6c78",
+          "function": {
+            "arguments": "{}",
+            "name": "get_all_lines"
+          },
+          "type": "function",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_e4debf7a5e154a0d9b6c78",
+      "content": [
+        {
+          "type": "text",
+          "text": "G1"
+        },
+        {
+          "type": "text",
+          "text": "G2"
+        },
+        {
+          "type": "text",
+          "text": "G3"
+        }
+      ]
+    },
+    {
+      "content": "我已成功获取了所有高铁线路编号，分别是 G1、G2 和 G3。接下来，我将分别查询这三条线路的起始站点名称，以确定哪些线路可以从站点 cqx 到达 gyb。",
+      "role": "assistant",
+      "tool_calls": [
+        {
+          "id": "call_abc51acab1784af9bd90dd",
+          "function": {
+            "arguments": "{\"line_name\": \"G1\"}",
+            "name": "query_stations"
+          },
+          "type": "function",
+          "index": 0
+        },
+        {
+          "id": "call_e5a71b71be024d04adeb1e",
+          "function": {
+            "arguments": "{\"line_name\": \"G2\"}",
+            "name": "query_stations"
+          },
+          "type": "function",
+          "index": 1
+        },
+        {
+          "id": "call_e0ced67191084a5cbf1f06",
+          "function": {
+            "arguments": "{\"line_name\": \"G3\"}",
+            "name": "query_stations"
+          },
+          "type": "function",
+          "index": 2
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_abc51acab1784af9bd90dd",
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"line\": \"G1\", \"start\": \"bjx\", \"end\": \"zzd\"}"
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_e5a71b71be024d04adeb1e",
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"line\": \"G2\", \"start\": \"cqx\", \"end\": \"gyb\"}"
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_e0ced67191084a5cbf1f06",
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"line\": \"G3\", \"start\": \"cdd\", \"end\": \"xab\"}"
+        }
+      ]
+    }
+  ],
+  "model": "qwen2.5-72b-instruct",
+  "parallel_tool_calls": true,
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "get_all_lines",
+        "description": "获取所有高铁线路编号，需要首先调用当前接口",
+        "parameters": {
+          "properties": {},
+          "title": "get_all_linesArguments",
+          "type": "object"
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "query_stations",
+        "description": "根据高铁线路编号查询起始站点名称，可用于判断指定线路是否能从某个站点到达另一个站点",
+        "parameters": {
+          "properties": {
+            "line_name": {
+              "description": "高铁线路编号如G1/G2",
+              "title": "Line Name",
+              "type": "string"
+            }
+          },
+          "required": [
+            "line_name"
+          ],
+          "title": "query_stationsArguments",
+          "type": "object"
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "query_duration",
+        "description": "根据高铁线路编号查询运行时长",
+        "parameters": {
+          "$defs": {
+            "LineNameRequest1": {
+              "properties": {
+                "line_name": {
+                  "description": "高铁线路编号如G1/G2",
+                  "title": "Line Name",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "line_name"
+              ],
+              "title": "LineNameRequest1",
+              "type": "object"
+            }
+          },
+          "properties": {
+            "line_name_request": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/LineNameRequest1"
+                }
+              ],
+              "description": "高铁线路编号请求类1"
+            }
+          },
+          "required": [
+            "line_name_request"
+          ],
+          "title": "query_durationArguments",
+          "type": "object"
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "query_ticket_price",
+        "description": "根据高铁线路编号查询最低票价",
+        "parameters": {
+          "$defs": {
+            "LineNameRequest2": {
+              "properties": {
+                "line_name": {
+                  "description": "高铁线路编号如G1/G2",
+                  "title": "Line Name",
+                  "type": "string"
+                },
+                "not_used": {
+                  "default": "",
+                  "description": "暂未使用的参数",
+                  "title": "Not Used",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "line_name"
+              ],
+              "title": "LineNameRequest2",
+              "type": "object"
+            }
+          },
+          "properties": {
+            "line_name_request": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/LineNameRequest2"
+                }
+              ],
+              "description": "高铁线路编号请求类2"
+            }
+          },
+          "required": [
+            "line_name_request"
+          ],
+          "title": "query_ticket_priceArguments",
+          "type": "object"
+        }
+      }
+    }
+  ]
+}
+2025-05-02 22:41:30.723 INFO request_times: 0003
+type: RESPONSE
+spend_time_ms: 2697.194
+url: https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+status: 200
+body: {
+  "choices": [
+    {
+      "message": {
+        "content": "经过查询，我发现只有线路 G2 的起点为 cqx，终点为 gyb，符合您的出行需求。接下来，我将查询 G2 线路的运行时长和最低票价。",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "name": "query_duration",
+              "arguments": "{\"line_name_request\": {\"line_name\": \"G2\"}}"
+            },
+            "index": 0,
+            "id": "call_f6d6edf7443843ee8ab575",
+            "type": "function"
+          },
+          {
+            "function": {
+              "name": "query_ticket_price",
+              "arguments": "{\"line_name_request\": {\"line_name\": \"G2\", \"not_used\": \"\"}}"
+            },
+            "index": 1,
+            "id": "call_c203126e5c224e1086547e",
+            "type": "function"
+          }
+        ]
+      },
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null
+    }
+  ],
+  "object": "chat.completion",
+  "usage": {
+    "prompt_tokens": 1020,
+    "completion_tokens": 101,
+    "total_tokens": 1121
+  },
+  "created": 1746196891,
+  "system_fingerprint": null,
+  "model": "qwen2.5-72b-instruct",
+  "id": "chatcmpl-19b4eab4-736c-9d46-9fe2-59d3f3b5bf56"
+}
+2025-05-02 22:41:30.725 DEBUG Sending client message: root=JSONRPCRequest(method='tools/call', params={'name': 'query_duration', 'arguments': {'line_name_request': {'line_name': 'G2'}}}, jsonrpc='2.0', id=6)
+2025-05-02 22:41:30.743 DEBUG Client message sent successfully: 202
+2025-05-02 22:41:30.756 DEBUG Received SSE event: message
+2025-05-02 22:41:30.756 DEBUG Received server message: root=JSONRPCResponse(jsonrpc='2.0', id=6, result={'content': [{'type': 'text', 'text': '{"line": "G2", "duration": 120, "unit": "分钟"}'}], 'isError': False})
+2025-05-02 22:41:30.757 INFO ### seq 3 tool_seq 1 执行工具 query_duration 选择工具原因 经过查询，我发现只有线路 G2 的起点为 cqx，终点为 gyb，符合您的出行需求。接下来，我将查询 G2 线路的运行时长和最低票价。 参数 {"line_name_request": {"line_name": "G2"}} 工具返回 [TextContent(type='text', text='{"line": "G2", "duration": 120, "unit": "分钟"}', annotations=None)]
+2025-05-02 22:41:30.759 DEBUG Sending client message: root=JSONRPCRequest(method='tools/call', params={'name': 'query_ticket_price', 'arguments': {'line_name_request': {'line_name': 'G2', 'not_used': ''}}}, jsonrpc='2.0', id=7)
+2025-05-02 22:41:30.781 DEBUG Client message sent successfully: 202
+2025-05-02 22:41:30.794 DEBUG Received SSE event: message
+2025-05-02 22:41:30.794 DEBUG Received server message: root=JSONRPCResponse(jsonrpc='2.0', id=7, result={'content': [{'type': 'text', 'text': '{"line": "G2", "price": 130, "currency": "CNY"}'}], 'isError': False})
+2025-05-02 22:41:30.794 INFO ### seq 3 tool_seq 2 执行工具 query_ticket_price 选择工具原因 经过查询，我发现只有线路 G2 的起点为 cqx，终点为 gyb，符合您的出行需求。接下来，我将查询 G2 线路的运行时长和最低票价。 参数 {"line_name_request": {"line_name": "G2", "not_used": ""}} 工具返回 [TextContent(type='text', text='{"line": "G2", "price": 130, "currency": "CNY"}', annotations=None)]
+2025-05-02 22:41:30.839 INFO request_times: 0004
+type: REQUEST
+url: https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+method: POST
+body: {
+  "messages": [
+    {
+      "role": "system",
+      "content": "仅使用role=tool相关数据进行分析，不使用模型中的数据"
+    },
+    {
+      "role": "user",
+      "content": "要求：每次返回选择工具时，在choices.message.content返回选择工具的原因\n任务：我要坐高铁从站点cqx到gyb，有什么线路，需要多久，最低多少钱"
+    },
+    {
+      "content": "为了完成这个任务，我将分几个步骤来进行。首先，我需要获取所有可用的高铁线路编号。然后，我将检查这些线路中哪些可以从站点cqx到达gyb。最后，对于可以连接这两个站点的每条线路，我将查询它们的运行时长和最低票价。现在，我将开始第一步，即获取所有高铁线路编号。",
+      "role": "assistant",
+      "tool_calls": [
+        {
+          "id": "call_e4debf7a5e154a0d9b6c78",
+          "function": {
+            "arguments": "{}",
+            "name": "get_all_lines"
+          },
+          "type": "function",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_e4debf7a5e154a0d9b6c78",
+      "content": [
+        {
+          "type": "text",
+          "text": "G1"
+        },
+        {
+          "type": "text",
+          "text": "G2"
+        },
+        {
+          "type": "text",
+          "text": "G3"
+        }
+      ]
+    },
+    {
+      "content": "我已成功获取了所有高铁线路编号，分别是 G1、G2 和 G3。接下来，我将分别查询这三条线路的起始站点名称，以确定哪些线路可以从站点 cqx 到达 gyb。",
+      "role": "assistant",
+      "tool_calls": [
+        {
+          "id": "call_abc51acab1784af9bd90dd",
+          "function": {
+            "arguments": "{\"line_name\": \"G1\"}",
+            "name": "query_stations"
+          },
+          "type": "function",
+          "index": 0
+        },
+        {
+          "id": "call_e5a71b71be024d04adeb1e",
+          "function": {
+            "arguments": "{\"line_name\": \"G2\"}",
+            "name": "query_stations"
+          },
+          "type": "function",
+          "index": 1
+        },
+        {
+          "id": "call_e0ced67191084a5cbf1f06",
+          "function": {
+            "arguments": "{\"line_name\": \"G3\"}",
+            "name": "query_stations"
+          },
+          "type": "function",
+          "index": 2
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_abc51acab1784af9bd90dd",
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"line\": \"G1\", \"start\": \"bjx\", \"end\": \"zzd\"}"
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_e5a71b71be024d04adeb1e",
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"line\": \"G2\", \"start\": \"cqx\", \"end\": \"gyb\"}"
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_e0ced67191084a5cbf1f06",
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"line\": \"G3\", \"start\": \"cdd\", \"end\": \"xab\"}"
+        }
+      ]
+    },
+    {
+      "content": "经过查询，我发现只有线路 G2 的起点为 cqx，终点为 gyb，符合您的出行需求。接下来，我将查询 G2 线路的运行时长和最低票价。",
+      "role": "assistant",
+      "tool_calls": [
+        {
+          "id": "call_f6d6edf7443843ee8ab575",
+          "function": {
+            "arguments": "{\"line_name_request\": {\"line_name\": \"G2\"}}",
+            "name": "query_duration"
+          },
+          "type": "function",
+          "index": 0
+        },
+        {
+          "id": "call_c203126e5c224e1086547e",
+          "function": {
+            "arguments": "{\"line_name_request\": {\"line_name\": \"G2\", \"not_used\": \"\"}}",
+            "name": "query_ticket_price"
+          },
+          "type": "function",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_f6d6edf7443843ee8ab575",
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"line\": \"G2\", \"duration\": 120, \"unit\": \"分钟\"}"
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_c203126e5c224e1086547e",
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"line\": \"G2\", \"price\": 130, \"currency\": \"CNY\"}"
+        }
+      ]
+    }
+  ],
+  "model": "qwen2.5-72b-instruct",
+  "parallel_tool_calls": true,
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "get_all_lines",
+        "description": "获取所有高铁线路编号，需要首先调用当前接口",
+        "parameters": {
+          "properties": {},
+          "title": "get_all_linesArguments",
+          "type": "object"
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "query_stations",
+        "description": "根据高铁线路编号查询起始站点名称，可用于判断指定线路是否能从某个站点到达另一个站点",
+        "parameters": {
+          "properties": {
+            "line_name": {
+              "description": "高铁线路编号如G1/G2",
+              "title": "Line Name",
+              "type": "string"
+            }
+          },
+          "required": [
+            "line_name"
+          ],
+          "title": "query_stationsArguments",
+          "type": "object"
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "query_duration",
+        "description": "根据高铁线路编号查询运行时长",
+        "parameters": {
+          "$defs": {
+            "LineNameRequest1": {
+              "properties": {
+                "line_name": {
+                  "description": "高铁线路编号如G1/G2",
+                  "title": "Line Name",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "line_name"
+              ],
+              "title": "LineNameRequest1",
+              "type": "object"
+            }
+          },
+          "properties": {
+            "line_name_request": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/LineNameRequest1"
+                }
+              ],
+              "description": "高铁线路编号请求类1"
+            }
+          },
+          "required": [
+            "line_name_request"
+          ],
+          "title": "query_durationArguments",
+          "type": "object"
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "query_ticket_price",
+        "description": "根据高铁线路编号查询最低票价",
+        "parameters": {
+          "$defs": {
+            "LineNameRequest2": {
+              "properties": {
+                "line_name": {
+                  "description": "高铁线路编号如G1/G2",
+                  "title": "Line Name",
+                  "type": "string"
+                },
+                "not_used": {
+                  "default": "",
+                  "description": "暂未使用的参数",
+                  "title": "Not Used",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "line_name"
+              ],
+              "title": "LineNameRequest2",
+              "type": "object"
+            }
+          },
+          "properties": {
+            "line_name_request": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/LineNameRequest2"
+                }
+              ],
+              "description": "高铁线路编号请求类2"
+            }
+          },
+          "required": [
+            "line_name_request"
+          ],
+          "title": "query_ticket_priceArguments",
+          "type": "object"
+        }
+      }
+    }
+  ]
+}
+2025-05-02 22:41:33.160 INFO request_times: 0004
+type: RESPONSE
+spend_time_ms: 2321.895
+url: https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+status: 200
+body: {
+  "choices": [
+    {
+      "message": {
+        "content": "您可以选择 G2 线路从站点 cqx 前往 gyb。这条线路的运行时长大约为 120 分钟（即 2 小时），最低票价为 130 元人民币 (CNY)。希望这些信息对您有所帮助！如果您还有其他问题或需要进一步的帮助，请随时告诉我。",
+        "role": "assistant"
+      },
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null
+    }
+  ],
+  "object": "chat.completion",
+  "usage": {
+    "prompt_tokens": 1175,
+    "completion_tokens": 76,
+    "total_tokens": 1251
+  },
+  "created": 1746196893,
+  "system_fingerprint": null,
+  "model": "qwen2.5-72b-instruct",
+  "id": "chatcmpl-da0e2bac-c542-9bab-b3fa-ec7c8d2a8594"
+}
+2025-05-02 22:41:33.161 INFO 获得结果：您可以选择 G2 线路从站点 cqx 前往 gyb。这条线路的运行时长大约为 120 分钟（即 2 小时），最低票价为 130 元人民币 (CNY)。希望这些信息对您有所帮助！如果您还有其他问题或需要进一步的帮助，请随时告诉我。

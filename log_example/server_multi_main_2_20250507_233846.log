@@ -1,0 +1,29 @@
+2025-05-07 23:38:46.618 DEBUG SseServerTransport initialized with endpoint: /messages/
+2025-05-07 23:38:56.823 DEBUG Setting up SSE connection
+2025-05-07 23:38:56.826 DEBUG Created new session with ID: 0ef78efb-2699-42d7-acb1-99f3bd0e7a15
+2025-05-07 23:38:56.829 DEBUG Starting SSE response task
+2025-05-07 23:38:56.830 DEBUG Yielding read and write streams
+2025-05-07 23:38:56.839 DEBUG Starting SSE writer
+2025-05-07 23:38:56.841 DEBUG Sent endpoint event: /messages/?session_id=0ef78efb269942d7acb199f3bd0e7a15
+2025-05-07 23:38:56.850 DEBUG Handling POST message
+2025-05-07 23:38:56.853 DEBUG Parsed session ID: 0ef78efb-2699-42d7-acb1-99f3bd0e7a15
+2025-05-07 23:38:56.856 DEBUG Received JSON: b'{"method":"initialize","params":{"protocolVersion":"2024-11-05","capabilities":{"sampling":{},"roots":{"listChanged":true}},"clientInfo":{"name":"mcp","version":"0.1.0"}},"jsonrpc":"2.0","id":0}'
+2025-05-07 23:38:56.860 DEBUG Validated client message: root=JSONRPCRequest(method='initialize', params={'protocolVersion': '2024-11-05', 'capabilities': {'sampling': {}, 'roots': {'listChanged': True}}, 'clientInfo': {'name': 'mcp', 'version': '0.1.0'}}, jsonrpc='2.0', id=0)
+2025-05-07 23:38:56.864 DEBUG Sending message to writer: root=JSONRPCRequest(method='initialize', params={'protocolVersion': '2024-11-05', 'capabilities': {'sampling': {}, 'roots': {'listChanged': True}}, 'clientInfo': {'name': 'mcp', 'version': '0.1.0'}}, jsonrpc='2.0', id=0)
+2025-05-07 23:38:56.870 DEBUG Sending message via SSE: root=JSONRPCResponse(jsonrpc='2.0', id=0, result={'protocolVersion': '2024-11-05', 'capabilities': {'experimental': {}, 'prompts': {'listChanged': False}, 'resources': {'subscribe': False, 'listChanged': False}, 'tools': {'listChanged': False}}, 'serverInfo': {'name': 'high_speed_railQuerySystem', 'version': '1.6.0'}})
+2025-05-07 23:38:56.878 DEBUG Handling POST message
+2025-05-07 23:38:56.881 DEBUG Parsed session ID: 0ef78efb-2699-42d7-acb1-99f3bd0e7a15
+2025-05-07 23:38:56.884 DEBUG Received JSON: b'{"method":"notifications/initialized","jsonrpc":"2.0"}'
+2025-05-07 23:38:56.886 DEBUG Validated client message: root=JSONRPCNotification(method='notifications/initialized', params=None, jsonrpc='2.0')
+2025-05-07 23:38:56.889 DEBUG Sending message to writer: root=JSONRPCNotification(method='notifications/initialized', params=None, jsonrpc='2.0')
+2025-05-07 23:38:56.893 DEBUG Received message: root=InitializedNotification(method='notifications/initialized', params=None, jsonrpc='2.0')
+2025-05-07 23:38:56.897 DEBUG Handling POST message
+2025-05-07 23:38:56.899 DEBUG Parsed session ID: 0ef78efb-2699-42d7-acb1-99f3bd0e7a15
+2025-05-07 23:38:56.900 DEBUG Received JSON: b'{"method":"tools/list","jsonrpc":"2.0","id":1}'
+2025-05-07 23:38:56.903 DEBUG Validated client message: root=JSONRPCRequest(method='tools/list', params=None, jsonrpc='2.0', id=1)
+2025-05-07 23:38:56.905 DEBUG Sending message to writer: root=JSONRPCRequest(method='tools/list', params=None, jsonrpc='2.0', id=1)
+2025-05-07 23:38:56.909 DEBUG Received message: <mcp.shared.session.RequestResponder object at 0x0000020E2FA6AAD0>
+2025-05-07 23:38:56.912 INFO Processing request of type ListToolsRequest
+2025-05-07 23:38:56.915 DEBUG Dispatching request of type ListToolsRequest
+2025-05-07 23:38:56.917 DEBUG Response sent
+2025-05-07 23:38:56.920 DEBUG Sending message via SSE: root=JSONRPCResponse(jsonrpc='2.0', id=1, result={'tools': [{'name': 'query_city_station', 'description': '查询城市中的高铁站点名称', 'inputSchema': {'properties': {'city_name': {'description': '城市名称', 'title': 'City Name', 'type': 'string'}}, 'required': ['city_name'], 'title': 'query_city_stationArguments', 'type': 'object'}}]})
